@@ -14,10 +14,12 @@ body {
 .container {
     display: grid;
     margin-top: 20px;
+    margin-right: 50px;
     outline: 1px solid black;
     width: 840px;
     height: 840px;
 }
+
 .boxes {
     border: 1px solid black;
 }

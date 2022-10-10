@@ -82,8 +82,8 @@ function draw(e) {
 
 btn.addEventListener('click', () => {
     clearGrid();
-    let rowInput = prompt('Please enter row value');
-    let colInput = prompt('Please enter column value');
+    let rowInput = prompt('Please enter row value between 16 and 100');
+    let colInput = prompt('Please enter column value between 16 and 100');
     grid = {rowInput, colInput};
     area = (grid.rowInput * grid.colInput);
     for(let i = 0; i < area; i++) {
@@ -95,6 +95,7 @@ btn.addEventListener('click', () => {
     container.style.setProperty('grid-template-rows', `repeat(${grid.rowInput}, 1fr)`)
     container.style.setProperty('grid-template-columns', `repeat(${grid.colInput}, 1fr)`)
 });
+
 
 
 let grid = {rows: 16, cols: 16};
