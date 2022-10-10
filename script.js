@@ -1,11 +1,28 @@
+const menu = document.createElement('div');
+menu.setAttribute('class','menucontainer')
+document.body.append(menu)
+
 const btn = document.createElement('button');
-document.body.append(btn);
+menu.append(btn);
 btn.textContent = 'Set new size';
+
+const drawBtn = document.createElement('button');
+menu.append(drawBtn);
+drawBtn.textContent = 'Color';
+
+const eraser = document.createElement('button');
+menu.append(eraser);
+eraser.textContent = 'Erase';
 
 const container = document.createElement('div');
 container.setAttribute('class','container');
 document.body.appendChild(container);
-// find a way to overwrite grid values with a prompt
+
+function clearGrid() {
+    container.innerHTML = '';
+}
+
+//Create grid using default value of 16x16
 
 function createGrid(area) {
     for(let i = 0; i < area; i++) {
@@ -18,16 +35,51 @@ function createGrid(area) {
     container.style.setProperty('grid-template-columns', `repeat(${grid.cols}, 1fr)`)
 }
 
-//on mouseclick, change class and add a background color to 'draw'
+/* 'Erase' by changing background color back to white
+    Make an erase button
+    When clicked, the draw function switches to making target white instead of black
+    Erase button changes to true when clicked
+    How do I declare erase boolean value?
+
+    create a variable declaring false
+    let erasemode = false;
+    make eventlistener for button to change this to true
+    eraser.addEventListener('click') {
+        erasemode = true;
+    }
+    in draw() {
+        if (erasemode == true) {
+            e.target.style.backgroundColor = 'white';
+        } else {
+            e.target.style.backgroundColor = 'black';
+        }
+    }
+*/
+
+let erasemode = false;
+eraser.addEventListener('click', () => {
+    erasemode = true;
+});
+
+let drawmode = true;
+drawBtn.addEventListener('click', () => {
+    if(erasemode == true) {
+        erasemode = false;
+        drawmode = true;
+    }
+});
+//Opted to callback drawback function for flexibility
+
 function draw(e) {
+    if(erasemode == true) {
+        e.target.style.backgroundColor = 'white';
+    } else {
     e.target.style.backgroundColor = 'black';
+    }
 }
 
-function clearGrid() {
-    container.innerHTML = '';
-}
+//Create a prompt for new grid value with button
 
-//make a prompt for new grid size
 btn.addEventListener('click', () => {
     clearGrid();
     let rowInput = prompt('Please enter row value');
@@ -44,6 +96,8 @@ btn.addEventListener('click', () => {
     container.style.setProperty('grid-template-columns', `repeat(${grid.colInput}, 1fr)`)
 });
 
+
 let grid = {rows: 16, cols: 16};
 let area = (grid.rows * grid.cols);
+
 createGrid(area);
