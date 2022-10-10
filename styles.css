@@ -1,16 +1,12 @@
 body {
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
-
 .container {
     display: grid;
+    margin: auto;
     outline: 1px solid black;
     width: 640px;
     height: 640px;
 }
 
-.boxes {
-    border: 1px solid black;
-    text-align: center;
-}
+
